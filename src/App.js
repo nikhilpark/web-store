@@ -39,8 +39,8 @@ function App() {
           <Route path="/signup" exact component={SignUp} />
           <Route path="/home" component={Home} />
           <ProtectedRoute path="/profile" component={Profile} redirectRoute="/signin" guardFunction={guardFx} />
-          <Route path="/product:productID" exact component={Product} />
-          <Route path="/edit:productID" exact component={Edit} />
+          <Route path="/product/:productID" component={Product} />
+          <Route path="/edit/:productID"  component={Edit} />
           <Route path="/cart" exact component={Cart} />
           <ProtectedRoute path="/create"  component={Create} redirectRoute="/signin" guardFunction={guardFx}/>
           

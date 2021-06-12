@@ -49,7 +49,7 @@ export default function Product(props) {
     } 
 
     const editProduct = () =>{
-        history.push(`/edit${product._id}`);
+        history.push(`/edit/${product._id}`);
     }
     
     return (

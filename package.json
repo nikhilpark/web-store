@@ -27,15 +27,17 @@
     "dev": "react-scripts start",
     "start-client": "react-scripts start",
     "start":"(cd server && npm start)",
+    "start-server":"(cd server && node ./index.js)",
     "heroku-postbuild": "npm run build",
     "build": "react-scripts build"
   },
+  "proxy":"http://localhost:2000",
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
-  },
+  }, 
   "browserslist": {
     "production": [
       ">0.2%",
