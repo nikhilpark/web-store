@@ -1,0 +1,26 @@
+#cont{
+    width: 60vw;
+
+    margin: 10vh auto;
+  
+
+    #greeting-cont{
+      
+        display: flex;
+        margin-bottom: 4vh;
+ 
+        h1{
+            width: fit-content;
+            margin: 0 auto;
+        }
+    
+    }
+     
+   
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

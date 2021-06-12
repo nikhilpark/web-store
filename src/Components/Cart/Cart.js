@@ -1,0 +1,123 @@
+
+import React,{useContext, useState} from 'react'
+import {Card,Button} from 'react-bootstrap'
+import {Context} from "../Store";
+import Axios from "axios"
+
+export default function Cart() {
+
+    const {cartOb,userOb} = useContext(Context);
+
+  const cartObject = cartOb;
+  const userObject = userOb;
+
+    const grid={
+        display:"grid",
+        gridTemplateColumns:"repeat(3,1fr)",
+        gap:'2px'
+        
+}
+
+const gridItem = {
+    border:'1px solid #343a40',
+    padding:'4px',
+    
+}
+
+const qtyPlus = (el) =>{
+    const itemL = cartObject.itemList
+    const exists = itemL.find(x=>x.id===el.id);
+
+    const newList = itemL.map((x)=>
+    x.id === el.id ? {...exists,qty:exists.qty+1} :x
+    )
+
+    const cartItems = {
+        user:userObject.username,
+        items: newList.length,
+        itemList: newList
+      }
+    Axios.post("/users/addToCart",cartItems)
+ 
+}
+
+const qtyMinus = (el)=>{
+
+    const itemL = cartObject.itemList
+    const exists = itemL.find(x=>x.id===el.id); 
+
+
+    
+  
+    const newList = itemL.map((x)=>
+    x.id === el.id  && el.qty>0 ? {...exists,qty:exists.qty-1} :x
+    )
+
+
+    const finalList = newList.filter(e=>e.qty>0) 
+
+    const cartItems = {
+        user:userObject.username,
+        items: finalList.length,
+        itemList: finalList
+      }
+
+      Axios.post("/users/addToCart",cartItems)
+
+    
+}
+    return (
+        <>
+        <div style={{ width:'60vw',margin:'5vh auto' }}>
+
+    
+
+        {cartObject.itemList.length>0?
+        <Card>
+            <div>
+                <h1>Cart :</h1>
+            </div>
+            <div></div>
+            <div style={grid}> 
+
+                <div>Item</div>
+                <div>Qty.</div> 
+                <div>Price</div>
+
+                {cartObject.itemList.map((el,key)=>{
+                    return (
+                        <> {el.qty>0?
+                            <>
+                                <div style={gridItem}>{el.title}</div>
+                                <div style={gridItem}>
+                                    <span>{el.qty}</span>
+                                    <Button variant="secondary" onClick={()=>qtyPlus(el)} style={{width:'2vw',margin:"0px 10px",padding:"0px"}}>+</Button>
+                                    <Button variant="dark" onClick={()=>qtyMinus(el)}  style={{width:'2vw', padding:"0px"}}>-</Button>
+                            </div>
+                            <div style={gridItem}>{el.qty*el.price} ₹</div>
+                            </>
+                            :<div style={{display:'none'}}>
+                            <div></div>  
+                            <div></div>
+                            <div></div>
+                            </div>}
+                        </>
+                    ) 
+                }
+                ) 
+            }
+            </div>
+            <hr/>
+            <div style={{display:'flex'}}>
+                <div>Total</div>
+                <div style={{display:'flex',width:'42vw',justifyContent:'flex-end'}}>
+                {cartObject.itemList.reduce((n,{price,qty})=> n + price*qty, 0)} ₹
+                </div>
+            </div>
+           
+        </Card>
+        :<div>Cart is Empty</div>}
+        </div>
+        </>
+    )
+}

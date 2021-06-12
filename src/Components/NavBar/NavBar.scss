@@ -1,0 +1,27 @@
+#navbar{
+    display:flex;
+    width:80vw;
+    flex-direction:row-reverse;
+    justify-content:flex-start;
+
+}
+
+
+.dropdown-item.active{
+    background-color: #fff !important;
+    color:#212529 !important;
+    &:active{
+        color: black !important;
+    }
+}
+
+@media screen and (max-width: 986px) {
+
+    #navbar{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    }
+  
+  
