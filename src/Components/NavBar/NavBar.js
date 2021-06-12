@@ -11,9 +11,7 @@ const NavBar = () => {
 
   const {cartOb, userOb} = React.useContext(Context);
   const cartObject = cartOb;
-  const userObject = userOb;
-  console.log(userObject);
- 
+  const userObject = userOb; 
 
   const emptyCart = () =>{
  
@@ -29,7 +27,6 @@ const NavBar = () => {
   }
 
 
-  console.log(cartObject.itemList)
   
  
 

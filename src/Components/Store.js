@@ -17,7 +17,7 @@ const Store = ({ children }) =>{
     const [cart,setCart] = useState(
 
         {
-            items:0,
+            itemcs:0,
             itemList:[], 
         
         }
