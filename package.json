@@ -6,6 +6,10 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.2",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.7",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "cookie-parser": "^1.4.5",
@@ -21,23 +25,24 @@
     "sass": "^1.34.0",
     "serve": "^12.0.0",
     "server": "^1.0.33",
+    "typescript": "^4.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "dev": "react-scripts start",
     "start-client": "react-scripts start",
-    "start":"(cd server && npm start)",
-    "start-server":"(cd server && node ./index.js)",
+    "start": "(cd server && npm start)",
+    "start-server": "(cd server && node ./index.js)",
     "heroku-postbuild": "npm run build",
     "build": "react-scripts build"
   },
-  "proxy":"http://localhost:2000",
+  "proxy": "http://localhost:2000",
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
-  }, 
+  },
   "browserslist": {
     "production": [
       ">0.2%",

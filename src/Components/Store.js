@@ -17,7 +17,7 @@ const Store = ({ children }) =>{
     const [cart,setCart] = useState(
 
         {
-            itemcs:0,
+            items:0,
             itemList:[], 
         
         }
@@ -50,7 +50,7 @@ const Store = ({ children }) =>{
         axios.get("users/getcart").then((res)=>{
             const fetchedCart = res.data;
             setCart(fetchedCart); 
-            
+    
         })
         
     }
@@ -58,7 +58,7 @@ const Store = ({ children }) =>{
     },[userObject])
     
 
-
+ 
     return (
 
         <Context.Provider value={{cartOb:cart,userOb:userObject}}   >{children}</Context.Provider>

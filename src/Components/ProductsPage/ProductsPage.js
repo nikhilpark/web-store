@@ -1,8 +1,7 @@
 import React from 'react'
 import Products from '../Products/Products'
-import {CardColumns} from 'react-bootstrap'
 
-import './Home.scss'
+import './ProductsPage.scss'
 
 export default function Home() {
     return (

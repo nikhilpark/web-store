@@ -6,11 +6,10 @@ import Store from "./Components/Store"
 import App from "./App";
 
 ReactDOM.render(
-  <React.StrictMode>
     <Store>
-      <App />
+      <App id="app"/>
     </Store>
-  </React.StrictMode>,
+,
   document.getElementById("root")
 );
 

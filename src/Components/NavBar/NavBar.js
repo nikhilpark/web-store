@@ -37,9 +37,9 @@ const NavBar = () => {
 
   <Navbar  collapseOnSelect sticky="top" expand="lg" bg="dark" variant="dark">
 
-  <Nav style={{width:"20vw"}}><LinkContainer  to="/home"><Navbar.Brand>Shopping App</Navbar.Brand></LinkContainer></Nav>
+  <Nav style={{width:"20vw"}}><LinkContainer  to="/"><Navbar.Brand>WebStore</Navbar.Brand></LinkContainer></Nav>
   
-  <Navbar.Toggle class="navbar-toggler collapsed"  aria-controls="responsive-navbar-nav" />
+  <Navbar.Toggle className="navbar-toggler collapsed"  aria-controls="responsive-navbar-nav" />
     
   <Navbar.Collapse  id="responsive-navbar-nav">
  
@@ -71,9 +71,9 @@ const NavBar = () => {
 
       <>
       {el.qty>0?
-      <LinkContainer to={`/product->${el.id}`}>
+      <LinkContainer  to={`/product->${el.id}`}>
       
-        <NavDropdown.Item   key={key}> 
+        <NavDropdown.Item  key={key}> 
         {el.title}
         <span style={{margin:"0px 4px",fontSize:"0.8rem"}}>
           ({el.qty})
@@ -94,15 +94,13 @@ const NavBar = () => {
   { cartObject.itemList.length !== 0 ? 
   <>  
    <NavDropdown.Divider />
-  {/* <LinkContainer to="/cart"><NavDropdown.Item>Total <div style={{backgroundColor:"#343a40",color:"white",borderRadius:'10px', padding:"2px 5px", width:"fit-content"}}>
-    {state.itemList.reduce((n,{price,qty})=> n + price*qty, 0)} ₹</div></NavDropdown.Item></LinkContainer>
-     */}
-    <LinkContainer className="ddItem" to="/cart"><NavDropdown.Item>Go to Cart
+
+    <LinkContainer className="ddItem" to="/cart"><NavDropdown.Item key="cart">Go to Cart
 
 </NavDropdown.Item></LinkContainer>
-  <NavDropdown.Item onClick={emptyCart} >Reset 🛒❌ </NavDropdown.Item>
+  <NavDropdown.Item key="reset" onClick={emptyCart} >Reset 🛒❌ </NavDropdown.Item>
   </>
-      :       <NavDropdown.Item >It's lonely here 🙁</NavDropdown.Item> }
+      :       <NavDropdown.Item key="lonely" >It's lonely here 🙁</NavDropdown.Item> }
     </NavDropdown>
       </Nav> 
 

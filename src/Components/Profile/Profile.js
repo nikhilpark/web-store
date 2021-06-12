@@ -46,7 +46,7 @@ export default function Profile() {
     const res = await Axios.get("users/logout");
     if (res.status === 200) {
       console.log("succsfully logged out");
-      window.location = "/home";
+      window.location = "/";
     }
   };
   return (
@@ -54,7 +54,7 @@ export default function Profile() {
       <div id="cont">
         <div id="greeting-cont">
          
-          {loggedIn ? <button onClick={logOut}>Logout</button> : <></>}
+          {loggedIn ? <Button variant="danger" onClick={logOut}>Logout</Button> : <></>}
         </div>
         {loggedIn ? 
         <div id="form-cont">

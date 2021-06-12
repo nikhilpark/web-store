@@ -1,13 +1,14 @@
 import React, { useState} from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert,Spinner } from "react-bootstrap";
 import Axios from "axios";
+
 import "./SignIn.scss";
 
 
 export default function SignIn() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [loggedIn,setloggedIn] = useState(false);
+  const [succesAlert,setSuccesAlert] = useState({display:'none'})
 
 
   const handleUsername = (e) => {
@@ -26,8 +27,11 @@ export default function SignIn() {
     };
     const res = await Axios.post("/users/signin", user);
     if(res.status === 200){
-      setloggedIn(true)
-      window.location = "/home"
+      setSuccesAlert({display:'block'})
+      setTimeout(()=>{
+        window.location = "/products"
+      },2000)
+      
       
     }
   };
@@ -35,6 +39,11 @@ export default function SignIn() {
   return (
     <>
       <div style={{ width: "30vw", margin: "5vh auto" }}>
+
+    <Alert variant="success" style={succesAlert}>
+      Success.. taking you to store &nbsp;&nbsp; <Spinner size="sm" animation='grow'/>
+    </Alert>
+
         <Form onSubmit={handleForm}>
           <Form.Group controlId="formGroupUserName">
             <Form.Label>User Name</Form.Label>

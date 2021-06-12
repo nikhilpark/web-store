@@ -1,6 +1,8 @@
 import React,{useState} from "react";
 import {Form,Button} from 'react-bootstrap';
 import Axios from 'axios';
+import { Alert } from "react-bootstrap";
+import {Link} from "react-router-dom"
 import './SignUp.scss'
 
 export default function SignUp() {
@@ -8,6 +10,8 @@ export default function SignUp() {
   const [email, setEmail] = useState();
   const [password,setPassword] = useState();
   const [password2,setPassword2] = useState();
+  const [succesAlert,setSuccessAlert] = useState({display:'none'})
+  const [failureAlert,setFailureAlert] = useState({display:'none'})
 
   const handleUsername = (e) =>{
     setUsername(e.target.value) 
@@ -36,7 +40,19 @@ export default function SignUp() {
 
 
     const res = await Axios.post("/users/signup",user)
-    console.log(res)
+    if (res.status ===200){
+      if(res.data.code === 101 ){
+        console.log("user already exists")
+        setFailureAlert({display:'block'})
+        setTimeout(()=>{
+          setFailureAlert({display:'none'})
+        },4000)
+      }
+      if(res.data.code === 100 ){
+        console.log("user succesfully registered")
+        setSuccessAlert({display:'block'})
+      }
+    } 
   }else{
     console.log("Passwords dont match")
   }
@@ -44,6 +60,18 @@ export default function SignUp() {
 
   return <>
 <div style={{width: "30vw",margin:"5vh auto"}}>
+  <Alert variant="success" style={succesAlert}>
+    Succesfully registered! 
+    &nbsp;&nbsp;&nbsp;
+    <Link to="/signin">SignIn</Link>
+  </Alert>
+
+
+  <Alert variant="danger" style={failureAlert} >
+    Username taken!
+    &nbsp;&nbsp;&nbsp;
+  </Alert>
+
 <Form onSubmit={handleForm}>
          <Form.Group  controlId="formGroupUserName">
             <Form.Label>User Name</Form.Label>

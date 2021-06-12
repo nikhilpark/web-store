@@ -1,24 +1,34 @@
 import React, { useState, useContext } from "react";
-import { Button, Alert } from "react-bootstrap";
+import { Button, Alert,Spinner,Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Context } from "../Store";
 import Axios from "axios";
+import './AddToCart.scss'
 
 
 export default function AddToCart(props) {
   const { cartOb, userOb } = useContext(Context);
+  const [spinner,setSpinner] = useState({display:'none'});
+  const [show,setShow] = useState(false);
+
   const cartObject = cartOb;
   const userObject = userOb;
+  
  
+const handleClose = ()=>{
+  setShow(false)
+}
+const goToCart = () =>{
+  setShow(false)
+  window.location="/cart"
+}
  
 
-  const [alert, setAlert] = useState({
-    display: "none",
-  });
-
-  const [ke, setKe] = useState();
-
+ 
   const addToCart = async () => {
+
+    setSpinner({display:'inline-block',marginLeft:'5px'})
+
     const itemL = cartObject.itemList;
    
     let newList = [];
@@ -35,7 +45,7 @@ export default function AddToCart(props) {
       newList = [...itemL, { ...item, qty: 1 }];
     }
   
-    const cartItems = {
+    const cartItems = { 
       user:userObject.username,
       items: newList.length,
       itemList: newList
@@ -43,23 +53,13 @@ export default function AddToCart(props) {
     console.log(cartItems)
     const response = await Axios.post("/users/addToCart",cartItems)
     if (response.status === 200){
-      setKe(props.id);
-      setAlert({
-        display: "block",   
-        marginTop: "2vh",
-      });
-      setTimeout(() => {
-        setAlert({
-          display: "none",
-        });
-      }, 2000);
+
+      setSpinner({display:'none'})
+      setShow(true);
   
   
   
-      // stateSet({
-      //   items: newList.length,
-      //   itemList: newList,
-      // });
+
     }
    
 
@@ -72,16 +72,25 @@ export default function AddToCart(props) {
         <>
           <Button variant="secondary" onClick={addToCart}>
             Add to Cart
+            <Spinner style={spinner} animation="border" size="sm"/>
           </Button>
-          {props.id === ke ? (
-            <div style={alert}>
-              <Alert variant="success">
-                Product added to &nbsp;<Link to="/cart">Cart</Link>
-              </Alert>
-            </div>
-          ) : (
-            <></>
-          )}
+
+          <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Product Succesfully Added</Modal.Title>
+        </Modal.Header>
+        <Modal.Body> {props.title} </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={goToCart}>
+            Go to Cart
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      
+      
         </>
       ) : (
         <>

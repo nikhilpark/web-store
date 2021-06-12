@@ -1,12 +1,14 @@
 
 import React,{useContext, useState} from 'react'
-import {Card,Button} from 'react-bootstrap'
+import {Card,Button,Spinner} from 'react-bootstrap'
 import {Context} from "../Store";
 import Axios from "axios"
 
 export default function Cart() {
 
     const {cartOb,userOb} = useContext(Context);
+    const [ke,setKe] = useState();
+    const [spinner,setSpinner] = useState({display:'none'});
 
   const cartObject = cartOb;
   const userObject = userOb;
@@ -24,8 +26,11 @@ const gridItem = {
     
 }
 
-const qtyPlus = (el) =>{
+const qtyPlus = async (el) =>{
+    setKe(el.id)
+    setSpinner({display:"inline-block",marginLeft:"1vw"})
     const itemL = cartObject.itemList
+
     const exists = itemL.find(x=>x.id===el.id);
 
     const newList = itemL.map((x)=>
@@ -37,12 +42,16 @@ const qtyPlus = (el) =>{
         items: newList.length,
         itemList: newList
       }
-    Axios.post("/users/addToCart",cartItems)
+    const res = await Axios.post("/users/addToCart",cartItems)
+    if(res.status === 200) {
+        setSpinner({display:"none"})
+    }
  
 }
 
-const qtyMinus = (el)=>{
-
+const qtyMinus = async (el)=>{
+    setKe(el.id)
+    setSpinner({display:"inline-block",marginLeft:"1vw"})
     const itemL = cartObject.itemList
     const exists = itemL.find(x=>x.id===el.id); 
 
@@ -62,7 +71,10 @@ const qtyMinus = (el)=>{
         itemList: finalList
       }
 
-      Axios.post("/users/addToCart",cartItems)
+      const res = await Axios.post("/users/addToCart",cartItems)
+      if(res.status === 200) {
+          setSpinner({display:"none"})
+      }
 
     
 }
@@ -93,6 +105,8 @@ const qtyMinus = (el)=>{
                                     <span>{el.qty}</span>
                                     <Button variant="secondary" onClick={()=>qtyPlus(el)} style={{width:'2vw',margin:"0px 10px",padding:"0px"}}>+</Button>
                                     <Button variant="dark" onClick={()=>qtyMinus(el)}  style={{width:'2vw', padding:"0px"}}>-</Button>
+                                    {el.id === ke ? <Spinner style={spinner} animation="border" size="sm"/>:<></> }
+                                    
                             </div>
                             <div style={gridItem}>{el.qty*el.price} ₹</div>
                             </>

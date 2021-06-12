@@ -11,7 +11,7 @@ let userRouter = express.Router();
 userRouter.use(methodOverride("_method"));
 userRouter.use(express.json());
 userRouter.use(express.urlencoded({ extended: true }));
-
+ 
 userRouter.get("/", (req, res) => {
     res.send("works"); 
   });
@@ -23,10 +23,10 @@ userRouter.post("/signup",async (req,res)=>{
     User.findOne ({username: username})
     .then(async user => {
       if(user){
-        res.send("Already registred")
+        res.send({code:101,msg:"user already exists"})
       } else{
         const newUser = new User({
-          username,
+          username, 
           email,
           password
         }); 
@@ -38,8 +38,7 @@ userRouter.post("/signup",async (req,res)=>{
 
           newUser.save()
             .then(_user=>{
-              res.send("succesfully registred")
-              console.log("registered")
+              res.send({code:100,msg:"succesfully registered"})
             })
             .catch(__err=>console.log(err))
         }))
@@ -136,7 +135,6 @@ userRouter.post("/addToCart",async (req,res)=>{
     if(err) throw err;
     else{
       res.send({status:'success'})
-      console.log("added")
     }
   }
     
