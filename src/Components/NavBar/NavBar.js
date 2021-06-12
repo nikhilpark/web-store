@@ -74,7 +74,7 @@ const NavBar = () => {
 
       <>
       {el.qty>0?
-      <LinkContainer to={`/product${el.id}`}>
+      <LinkContainer to={`/product->${el.id}`}>
       
         <NavDropdown.Item   key={key}> 
         {el.title}
@@ -107,7 +107,7 @@ const NavBar = () => {
   </>
       :       <NavDropdown.Item >It's lonely here 🙁</NavDropdown.Item> }
     </NavDropdown>
-      </Nav>
+      </Nav> 
 
       </Nav>    
   </Navbar.Collapse>

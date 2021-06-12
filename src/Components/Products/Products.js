@@ -42,7 +42,7 @@ export default function Products() {
                 alt="img"
               />
               <Card.Body>
-                <LinkContainer className="plink" to={`/product/${el._id}`}>
+                <LinkContainer className="plink" to={`/product->${el._id}`}>
                   <Card.Title>
                     <span id="ptitle">{el.title}</span>
                   </Card.Title>
