@@ -6,11 +6,13 @@ const mongoose = require("mongoose");
 const passport = require('passport');
 const session = require('cookie-session');
 const path = require("path");
+const dotenv = require("dotenv")
+dotenv.config()
 
 
 
 const localURL = "mongodb://localhost:27017/ShoppingApp";
-const cloudURL = "mongodb+srv://nikhilpark:Nklplp12@@blog.ngngn.mongodb.net/shoppingApp?retryWrites=true&w=majority"
+const cloudURL = process.env.MONGO_URI
 mongoose
   .connect(cloudURL, {
     useNewUrlParser: true,
