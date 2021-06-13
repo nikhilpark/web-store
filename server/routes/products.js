@@ -9,15 +9,9 @@ productRouter.use(methodOverride("_method"));
 productRouter.use(express.json());
 productRouter.use(express.urlencoded({ extended: true }));
 
-productRouter.get("/", (req, res) => {
-  res.send("works");
-});
 
 productRouter
   .route("/create")
-  .get((req, res) => {
-    res.send("create");
-  })
   .post(async (req, res) => {
     const product = req.body;
     await Product.create(product);

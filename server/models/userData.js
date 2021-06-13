@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
   city:String,
   state:String,
   zip:Number,
+  userRole:{
+    type:Number,
+    default:3
+  }
  
 });
 

@@ -8,24 +8,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import "./Products.scss";
 
-export default function Products() {
-  const [products, setProducts] = useState({});
-  const [api, setApi] = useState("");
- 
-
-  useEffect(() => {
-    Axios.get("/products/view")
-      .then((res) => {
-        setProducts(res.data);
-        setApi('done');
-        console.log(products);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [api]);
-
- 
+export default function Products({products, loading}) {
   
 
   return (

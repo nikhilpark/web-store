@@ -36,7 +36,8 @@ module.exports = function (passport) {
         firstname:user.firstname,
         lastname:user.lastname,
         state:user.state,
-        zip:user.zip
+        zip:user.zip,
+        userRole:user.userRole
       };
       cb(err, userInformation);
     });

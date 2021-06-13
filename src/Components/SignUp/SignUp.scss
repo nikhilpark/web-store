@@ -1,4 +1,17 @@
-#cont-div{
-    width: 70vw;
-    margin: 10vh auto;
+#main-cont{
+    width: 30vw;
+    margin: 5vh auto;
+    background-color: #343a40;
+    padding: 3rem 2rem;
+    color: white;
 }
+
+
+@media screen and (max-width: 900px) {
+
+    #main-cont{
+       width: 80vw;
+        
+    }
+}
+  

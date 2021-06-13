@@ -1,6 +1,7 @@
 import React, {useState}  from "react";
 import { Form,Button,Alert } from "react-bootstrap"
 import Axios from "axios"
+import "./NewProductForm.scss"
 
 
 const NewProductForm = ( props ) =>{
@@ -71,7 +72,7 @@ const handleForm = async (e) => {
 
     return(
         
-    <div style={{width: "40vw",margin:"2vh"}}>
+    <div id="main-cont">
         
         <div style={alert}>
             {!props.edit?

@@ -4,7 +4,7 @@ import { Card, Button, Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import AddToCart from "../AddToCart/AddToCart";
 import { Context } from "../Store";
-import "./Product.css";
+import "./Product.scss";
 
 export default function Product(props) {
   const productID = { id: props.match.params.productID };
@@ -43,7 +43,7 @@ export default function Product(props) {
     getProduct();
   }, [productID.id]);
 
-  const deleteProduct = () => {
+  const deleteProduct = () => { 
     console.log("yoo");
     const res = Axios.post("/products/delete", { productID });
     history.push("/home");
@@ -56,7 +56,7 @@ export default function Product(props) {
   return (
     <>
       {typeof product === "object" && product !== null ? (
-        <div id="cont">
+        <div id="prod-cont">
           <Card>
             <Card.Img
               variant="top"
@@ -77,7 +77,9 @@ export default function Product(props) {
                     title={product.title}
                   />
                   &nbsp;&nbsp;
-                  <Button variant="secondary" onClick={editProduct}>
+                  {userObject.userRole === 1 || userObject.userRole === 2?<>
+                  
+                    <Button variant="secondary" onClick={editProduct}>
                     {" "}
                     Edit{" "}
                   </Button>
@@ -86,6 +88,9 @@ export default function Product(props) {
                     {" "}
                     Delete
                   </Button>
+                  
+                  </>:<></> }
+                 
                 </>
               ) : (
                 <></>

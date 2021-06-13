@@ -59,7 +59,7 @@ export default function SignUp() {
   }
 
   return <>
-<div style={{width: "30vw",margin:"5vh auto"}}>
+<div id="main-cont">
   <Alert variant="success" style={succesAlert}>
     Succesfully registered! 
     &nbsp;&nbsp;&nbsp;

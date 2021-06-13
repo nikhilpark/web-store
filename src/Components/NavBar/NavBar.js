@@ -46,7 +46,7 @@ const NavBar = () => {
   
   <Nav id="navbar" style={{}}>
   <LinkContainer to="/profile"><Nav.Link>{userObject.username}</Nav.Link></LinkContainer>
-    {userObject.loggedIn?<>
+    {userObject.loggedIn && (userObject.userRole === 1 || userObject.userRole === 2)?<>
 
 
      <LinkContainer to="/create"><Nav.Link>Create</Nav.Link></LinkContainer>

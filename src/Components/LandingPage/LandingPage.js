@@ -6,7 +6,7 @@ export default function LandingPage() {
     return (
         <div id="container">
             <div id="greeting-cont">
-                <h1>Welome to our Web Store</h1>
+                <h1>Welome!</h1>
                 <div id="btn-cont">
                     <Button variant="secondary">
                         <Link  to="/products">Go to products</Link>

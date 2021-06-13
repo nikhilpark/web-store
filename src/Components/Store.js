@@ -29,7 +29,7 @@ const Store = ({ children }) =>{
         axios.get("/users/getuser").then((res)=>{
 
             if(res.data){
-          
+           
                 setUserObject({username:res.data.username,
                                 email:res.data.email,
                                 address1:res.data.address1,
@@ -40,6 +40,7 @@ const Store = ({ children }) =>{
                                 lastname:res.data.lastname,
                                 state:res.data.state,
                                 zip:res.data.zip,
+                                userRole:res.data.userRole,
                             loggedIn:true
                 });
                
