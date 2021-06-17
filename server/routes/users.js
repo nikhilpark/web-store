@@ -111,6 +111,12 @@ userRouter.get("/getuser", (req, res) => {
   res.send(req.user);
 });
 
+userRouter.post("/getuserbyId", async(req, res) => {
+  const {id} = req.body;
+  const user = await User.findById(id)
+  res.send(user)
+});
+
 userRouter.get("/getcart", async (req, res) => {
   const user = req.user.username;
   const userCart = await cartItems.findOne({ user: user });
@@ -121,6 +127,11 @@ userRouter.get("/logout", (req, res) => {
   req.logout();
   res.send("succesfully logged out");
 });
+
+userRouter.get("/getAll",async (req,res)=>{
+  const userArray = await User.find()
+  res.send(userArray)
+})
 
 userRouter.post("/addToCart", async (req, res) => {
   const cart = req.body;
@@ -140,5 +151,26 @@ userRouter.post("/addToCart", async (req, res) => {
     }
   );
 });
+
+userRouter.post("/setRole",async(req,res)=>{
+  const {id,userRole} = req.body;
+  console.log(id.id)
+  console.log(userRole)
+  await User.findByIdAndUpdate(id.id,{userRole:userRole},(err,docs)=>{
+    if(err) throw err;
+    else{
+      res.send({status:"successs"}); 
+    }
+  })
+
+})
+
+userRouter.post("/deleteUser",async(req,res)=>{
+  const {id} = req.body;
+  const docs = await User.findByIdAndDelete(id.id)
+  if(docs){
+    res.send({status:"success"})
+  }
+})
 
 module.exports = userRouter;

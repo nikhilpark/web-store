@@ -4,6 +4,7 @@ import { Form, Button, Col } from "react-bootstrap";
 import "./Profile.scss";
 import Axios from "axios";
 import statelist from "../../misc/statelist";
+import LogOut from "../LogOut/LogOut";
 
 
 export default function Profile() {
@@ -39,22 +40,15 @@ export default function Profile() {
     const res = await Axios.post('/users/addData',userData)
     console.log(res)
   };
+ 
 
 
-
-  const logOut = async () => {
-    const res = await Axios.get("users/logout");
-    if (res.status === 200) {
-      console.log("succsfully logged out");
-      window.location = "/";
-    }
-  };
   return (
     <>
       <div id="cont">
         <div id="greeting-cont">
          
-          {loggedIn ? <Button variant="danger" onClick={logOut}>Logout</Button> : <></>}
+         
         </div>
         {loggedIn ? 
         <div id="form-cont">

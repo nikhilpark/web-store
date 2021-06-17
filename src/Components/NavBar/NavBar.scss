@@ -1,27 +1,144 @@
-#navbar{
-    display:flex;
-    width:80vw;
-    flex-direction:row-reverse;
-    justify-content:flex-start;
+#nav-outer{
+    width:100%;
+    background-color:var(--purple);
+    display: flex;
+    padding: 1rem;
+    color:white; 
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    border: 1px solid red;
 
+    #left-flex{
+       
+        border: 1px solid black;
+        min-width: fit-content;
+        a{
+            text-decoration: none;
+            
+            color: white;
+            opacity: 0.9; 
+            font-size: 1.4rem;
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+
+        
+
+        #loginBtn{
+            margin: 0 3rem;
+            background-color: white;
+            border: none !important;
+            border-radius: 0px !important;
+            color:var(--purple);
+            padding: 0.2rem 2.4rem;
+            font-size: 1.1rem;
+            &::after{
+                content: none;
+            }
+            &::before{
+                content: none;
+            }
+        }
+
+        #accountBtn{
+            margin: 0rem;
+            background: none;
+            border: none !important;
+            border-radius: 0px !important;
+            color:white;
+            padding: 0.2rem 2.4rem;
+            font-size: 1.1rem;
+            &::after{
+                content: "";
+            }
+
+
+        }
+
+        span{
+            cursor: pointer;
+            span{
+                font-size: 1.1rem;
+                margin: 0 0.5rem;
+                text-decoration: none;
+                color: white;
+                
+            }
+            #cart-icon{
+               
+                height: 25px;
+                width: 25px;
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+   
+
+.tippy-arrow {
+	width: 16px;
+	height: 16px;
+	color:white;
 }
 
 
-.dropdown-item.active{
-    background-color: #fff !important;
-    color:#212529 !important;
-    &:active{
-        color: black !important;
+.tippy-box {
+	position: relative;
+	color:black;
+	border-radius: 4px;
+    background: white;
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.68);
+    opacity: 1;
+	font-size: 14px;
+	line-height: 1.4;
+	outline: 0;
+	transition-property: transform, visibility, opacity
+}
+
+#tippyContainer{
+    padding:0;
+    #firstTippy{
+        #tippyHead{
+            font-weight:500;
+        }
+        #tippyLink{
+            margin-left:5rem;
+        }
+
+     
+        
+       
+    }
+
+    .tippyContent{
+        
+        span{
+            margin: 0 0.4rem;
+        }
+        font-size:1rem;
+        &:hover{
+            background:rgba($color: #6f42c1, $alpha: 0.3);
+            
+            
+        }
+        padding: 0.8rem 0.4rem;
+
+    }
+    .linkText{
+        text-decoration: none;
+        color: black;
     }
 }
 
-@media screen and (max-width: 986px) {
+hr{
+    margin: 0 !important;
+    padding: 0 !important;
+   }
 
-    #navbar{
-        display: flex;
-        flex-direction: column;
-    }
-    
-    }
-  
-  
+   .tippy-content {
+	padding: 0;
+}
+

@@ -47,7 +47,7 @@ export default function SignIn() {
  
   return (
     <>
-      <div id="main-cont">
+      <div id="mainCont">
 
     <Alert variant="success" style={succesAlert}>
       Success.. taking you to store &nbsp;&nbsp; <Spinner size="sm" animation='grow'/>

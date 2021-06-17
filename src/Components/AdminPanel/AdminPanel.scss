@@ -1,0 +1,27 @@
+#outerPCont {
+    width: 60vw;
+    margin: 10vh auto;
+
+    #pHead{
+        background-color: var(--purple);
+        color: white;
+        padding: 0.5rem 1rem;
+    }
+  #panelCont {
+    
+    color: rgb(0, 0, 0);
+    background-color: rgb(235, 235, 235);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:0.1rem;
+    padding: 1rem;
+
+    div{
+        border: 1px solid var(--purple);
+        padding: 0.4rem  0.8rem;
+    }
+  }
+
+}
+
+

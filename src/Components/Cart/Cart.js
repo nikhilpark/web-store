@@ -103,8 +103,8 @@ const qtyMinus = async (el)=>{
                                 <div style={gridItem}>{el.title}</div>
                                 <div style={gridItem}>
                                     <span>{el.qty}</span>
-                                    <Button variant="secondary" onClick={()=>qtyPlus(el)} style={{width:'2vw',margin:"0px 10px",padding:"0px"}}>+</Button>
-                                    <Button variant="dark" onClick={()=>qtyMinus(el)}  style={{width:'2vw', padding:"0px"}}>-</Button>
+                                    <Button variant="secondary" onClick={()=>qtyPlus(el)} style={{width:'2vw',margin:"0px 10px",padding:"0.1rem 1rem"}}>+</Button>
+                                    <Button variant="dark" onClick={()=>qtyMinus(el)}  style={{width:'2vw', padding:"0.1rem 1rem"}}>-</Button>
                                     {el.id === ke ? <Spinner style={spinner} animation="border" size="sm"/>:<></> }
                                     
                             </div>

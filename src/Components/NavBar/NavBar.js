@@ -1,114 +1,102 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {Navbar,Nav,Button,NavDropdown,Container} from "react-bootstrap"
-import {LinkContainer} from 'react-router-bootstrap'
-import {Context} from "../Store";
-import Axios from "axios"
-import './NavBar.scss'
-
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { Context } from "../Store";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css'
+import Axios from "axios";
+import "./NavBar.scss";
+import cartIcon from "./cart.png";
+import LogOut from "../LogOut/LogOut";
 
 const NavBar = () => {
-
-
-  const {cartOb, userOb} = React.useContext(Context);
+  const { cartOb, userOb } = React.useContext(Context);
   const cartObject = cartOb;
-  const userObject = userOb; 
+  const userObject = userOb;
 
-  const emptyCart = () =>{
- 
+  const emptyCart = () => {
     const cartItems = {
-      user:userObject.username,
+      user: userObject.username,
       items: 0,
-      itemList: []
-    }
+      itemList: [],
+    };
 
-    Axios.post("/users/addToCart",cartItems)
-  
- 
-  }
+    Axios.post("/users/addToCart", cartItems);
+  };
 
+  const tippyContent = (
+    <div id="tippyContainer">
+      {!userObject.loggedIn?<> 
+      <div id="firstTippy" className="tippyContent">
+        <span id="tippyHead">New Customer ? </span>
+        <span id="tippyLink"> <Link to="/signup">SignUp</Link></span>
+      </div>
+      <hr/>
 
-  
- 
+      <div id="secondTippy" className="tippyContent">
+        <span id="tippyLink"> <Link to="/signin" className="linkText">📱&nbsp;&nbsp; My Profile</Link></span>
+      </div>
+      <hr/>
+      <div id="thirdTippy" className="tippyContent">
+        <span id="tippyLink"> <Link to="/signin" className="linkText">📦 &nbsp;&nbsp;My orders</Link></span>
+      </div>
 
-  return (
-
-
+      </>:
       <>
-
-  <Navbar  collapseOnSelect sticky="top" expand="lg" bg="dark" variant="dark">
-
-  <Nav style={{width:"20vw"}}><LinkContainer  to="/"><Navbar.Brand>WebStore</Navbar.Brand></LinkContainer></Nav>
-  
-  <Navbar.Toggle className="navbar-toggler collapsed"  aria-controls="responsive-navbar-nav" />
-    
-  <Navbar.Collapse  id="responsive-navbar-nav">
- 
-  
-  <Nav id="navbar" style={{}}>
-  <LinkContainer to="/profile"><Nav.Link>{userObject.username}</Nav.Link></LinkContainer>
-    {userObject.loggedIn && (userObject.userRole === 1 || userObject.userRole === 2)?<>
-
-
-     <LinkContainer to="/create"><Nav.Link>Create</Nav.Link></LinkContainer>
-    
-     </>
-     :<></>}
-   
-    {!userObject.loggedIn?<>
-      <LinkContainer to="/signin"><Nav.Link>Sign In</Nav.Link></LinkContainer>
-    <LinkContainer to="/signup"><Nav.Link>Sign Up</Nav.Link></LinkContainer>
-    </>:<></>}
-   
-   
-
-    <Nav className="me-auto"> 
-   
-    <NavDropdown className="navdd" style={{color:'grey'}} title={["🛒", <sup> {cartObject.items} </sup>]} id="collasible-nav-dropdown">
-
-  {cartObject.itemList.map((el,key)=>{ 
-    return(
-
-
-      <>
-      {el.qty>0?
-      <LinkContainer  to={`/product->${el.id}`}>
+       <div id="firstTippy" className="tippyContent">
+        <span id="tippyHead">Hi, {userObject.username}! </span>
+        <span id="tippyLink"> <LogOut/></span>
+      </div>
+      <hr/>
+      <div id="secondTippy" className="tippyContent">
+        <span id="tippyLink"> <Link to="/profile" className="linkText">📱&nbsp;&nbsp; My Profile</Link></span>
+      </div>
+      <hr/>
+      <div id="thirdTippy" className="tippyContent">
+        <span id="tippyLink"> <Link to="/orders" className="linkText">📦 &nbsp;&nbsp;My orders</Link></span>
+      </div>
+      <hr/>
       
-        <NavDropdown.Item  key={key}> 
-        {el.title}
-        <span style={{margin:"0px 4px",fontSize:"0.8rem"}}>
-          ({el.qty})
-        </span>
-        {/* <div style={{display:'flex'}}>
-        <div style={{backgroundColor:"#343a40",color:"white",borderRadius:'10px', padding:"2px 5px", width:"fit-content"}}>
-          {el.price*el.qty} ₹ </div>
-        </div>  */}
-        </NavDropdown.Item>
-        </LinkContainer>
-  :<div style={{display:'none'}}></div>} 
-      </>
-  
-    ) 
-    
-  })}
-  
-  { cartObject.itemList.length !== 0 ? 
-  <>  
-   <NavDropdown.Divider />
+      </>}
+     
+      {userObject.userRole === 1 ?<>
+        <div id="thirdTippy" className="tippyContent">
+        <span id="tippyLink"> <Link to="/adminpanel" className="linkText">👨‍💻 &nbsp;&nbsp;Admin Panel</Link></span>
+      </div>
+      </>:
+      <></>}
+      
+    </div>
+  )
+  return (
+    <>
+      <div id="nav-outer">
+        <div id="left-flex" className="nav-member">
+          <Link to="/">Web Store</Link>
+        </div>
 
-    <LinkContainer className="ddItem" to="/cart"><NavDropdown.Item key="cart">Go to Cart
+        <div id="right-flex" style={{display:'flex'}} className="nav-member">
+        <Tippy  theme="light" interactive content={tippyContent}>
 
-</NavDropdown.Item></LinkContainer>
-  <NavDropdown.Item key="reset" onClick={emptyCart} >Reset 🛒❌ </NavDropdown.Item>
-  </>
-      :       <NavDropdown.Item key="lonely" >It's lonely here 🙁</NavDropdown.Item> }
-    </NavDropdown>
-      </Nav> 
-
-      </Nav>    
-  </Navbar.Collapse>
-
-</Navbar>
-</>
+          {userObject.loggedIn?
+          <Link to="/signin">
+        <button id="accountBtn">My Account</button>
+          </Link>:
+          <Link to="/signin">
+        <button id="loginBtn">Login</button>
+          </Link>}
+         
+        </Tippy>
+      
+           
+          <Link to="/cart">
+            <span>
+              <img id="cart-icon" src={cartIcon} alt="cart" />
+              <span>Cart</span>
+            </span>
+          </Link>
+        </div>
+      </div>
+    </>
   );
 };
 

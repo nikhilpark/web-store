@@ -37,13 +37,13 @@ export default function Products({products, loading}) {
               </Card.Body>
             </Card>
       
-          );
+          )
         })
       ) : (
         <div style={{ width: "fit-content", margin: "35vh auto" }}>
           <Spinner animation="border" />{" "}
         </div>
-      )}
+      )} 
     </>
   );
 }
