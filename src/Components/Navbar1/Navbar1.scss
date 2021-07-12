@@ -6,6 +6,14 @@
     padding: 2rem;
     justify-content: space-between;
     align-items: center;
+
+    h1{
+        margin:0 !important;
+    }
+}
+
+.hamLi{
+    display:none;
 }
 
 .navbar-logo {
@@ -62,26 +70,65 @@
 .menu-icon {
     display: none;
 }
+#loginBtn{
+    &:hover{
+        cursor:pointer;
+    }
+}
 
 @media screen and (max-width: 1060px) {
-
+    .hamLi{
+        display:block;
+    }
+    #tippy{
+        display:none;
+    }
+    #loginBtn{
+        display:none;
+    }
     #navList{
+        padding:0;
 
+        div{
+            width:100%;
+            button{
+                font-size:1.25rem !important;
+                padding: 1rem 0.4rem !important;
+                width:100%;
+            }
+        }
         li{
             &:nth-child(1){
                 margin-top: 4vh;
+                font-size:1.25rem;
+                
+            }
+            
+        }
+        .hamLink{
+            display:inline-block;
+            font-size:1.25rem;
+            width:100%;
+            margin-bottom:0.4rem;
+            border-bottom:1px solid white;
+            padding-bottom:0.4rem;
+
+            &:hover{
+                background:white;
+                color:var(--purple);
+                transition:0.4s ease-out
+
             }
         }
     
     }
     
 
+
     #loginBtn{
         background: none !important;
         color: white !important;
-        a{
-            color: white !important;
-        }
+      
     }
     .NavbarItems {
         position: relative;
@@ -101,9 +148,9 @@
     }
 
     .nav-menu.active {
-        background:var(--purple);
+        background-color:var(--purple);
         left: 0;
-        opacity: 1;
+        opacity: 0.97;
         transition: all 0.5s ease;
         z-index: 1;
     }
@@ -161,20 +208,11 @@
         transition: 250ms;
     }
 
-    Button {
-        display: none;
-    }
+  
 }
 
 span{
     cursor: pointer;
-    span{
-        font-size: 1.1rem;
-        margin: 0 0.5rem;
-        text-decoration: none;
-        color: white;
-        
-    }
     #cart-icon{
        
         height: 25px;

@@ -89,10 +89,10 @@ export default function UserDetail(props) {
           <div>Email -- {user.email}</div>
         </div>
         <div id="roleEditCont">
-          <Form onSubmit={handleRoleForm} style={{ display: "flex" }}>
+          <Form onSubmit={handleRoleForm} >
             <Form.Control
               onChange={handleSelect}
-              style={{ display: "flex" }}
+          
               as="select"
             >
               <option disabled selected="selected">

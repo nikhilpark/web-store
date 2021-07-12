@@ -53,7 +53,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/products", productRoutes);
-app.use("/users", userRoutes);
+app.use("/users", userRoutes); 
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));

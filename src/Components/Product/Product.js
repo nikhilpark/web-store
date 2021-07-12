@@ -68,14 +68,15 @@ export default function Product(props) {
               <Card.Title>{product.title}</Card.Title>
               <Card.Text>{product.description}</Card.Text>
               <Card.Text>Price: - {product.price}</Card.Text>
-              {userObject.loggedIn ? (
-                <>
-                  {" "}
-                  <AddToCart
+               <AddToCart
                     id={product._id}
                     price={product.price}
                     title={product.title}
                   />
+              {userObject.loggedIn ? (
+                <>
+                  {" "}
+                 
                   &nbsp;&nbsp;
                   {userObject.userRole === 1 || userObject.userRole === 2?<>
                   

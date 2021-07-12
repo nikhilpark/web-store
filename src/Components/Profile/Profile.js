@@ -98,7 +98,7 @@ export default function Profile() {
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>State / UT</Form.Label>
+                <Form.Label>State</Form.Label>
                 <Form.Control as="select"  defaultValue={userObject.state} onChange = {(e)=>setState(e.target.value)}>
                   <option>Choose...</option>
                 {statelist.map((el,idx)=>{return(

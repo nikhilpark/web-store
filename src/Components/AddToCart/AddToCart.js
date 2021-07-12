@@ -65,6 +65,10 @@ const goToCart = () =>{
 
   
   };
+  
+  const notLoggedIn = () =>{
+    setShow(true);
+  }
 
   return (
     <>
@@ -94,7 +98,23 @@ const goToCart = () =>{
         </>
       ) : (
         <>
+          <Button variant="secondary" onClick={notLoggedIn}>
+            Add to Cart
+            <Spinner style={spinner} animation="border" size="sm"/>
+          </Button>
 
+          <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>You must login first!</Modal.Title>
+        </Modal.Header>
+     
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      
         </>
       )}
     </>

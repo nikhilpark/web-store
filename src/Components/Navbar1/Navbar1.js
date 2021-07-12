@@ -30,10 +30,18 @@ const Navbar1 = () => {
           </div>
           <hr />
 
+            <div id="secondTippy" className="tippyContent">
+            <span id="tippyLink">
+              <Link to="/signin" className="linkText">
+                📲&nbsp;&nbsp; Login
+              </Link>
+            </span>
+          </div>
+
           <div id="secondTippy" className="tippyContent">
             <span id="tippyLink">
               <Link to="/signin" className="linkText">
-                📱&nbsp;&nbsp; My Profile
+                👤&nbsp;&nbsp; My Profile
               </Link>
             </span>
           </div>
@@ -49,7 +57,7 @@ const Navbar1 = () => {
       ) : (
         <>
           <div id="firstTippy" className="tippyContent">
-            <span id="tippyHead">Hi, {userObject.username}! </span>
+            <span id="tippyHead">Welcome, </span>
             <span id="tippyLink">
               <LogOut />
             </span>
@@ -96,7 +104,7 @@ const Navbar1 = () => {
   return (
     <nav className="NavbarItems">
         <h1 className="navbar-logo">
-            <Link to  = "/products">
+            <Link to  = "/products" onClick={handleClick}>
           Web Store<i className="fab fa-react"></i>
           
           </Link>
@@ -105,43 +113,87 @@ const Navbar1 = () => {
       <div className="menu-icon" onClick={handleClick}>
         <i className={click.clicked ? "fas fa-times" : "fas fa-bars"}></i>
       </div>
+     
       <ul id="navList" style={{margin:0}} className={click.clicked ? "nav-menu active" : "nav-menu"}>
-      
+      <hr/>
         <li>
-          <Tippy theme="light" interactive content={tippyContent}>
+          <Tippy id="tippy" trigger="click" theme="light" interactive content={tippyContent}>
             {userObject.loggedIn ? (
                
                 <div id="loginBtn">
-                  <Link className="link-style" to ="/profile">My account</Link>
+                  Hey, {userObject.firstname}
                 </div>
              
             ) : (
               
                   <div id="loginBtn">
-                  <Link className="link-style" to = "/signin">Login</Link>
+                  Hey, Guest
                 </div>
             
             )}
-          </Tippy>
+          </Tippy>  
         </li>
+         {userObject.loggedIn?<></>:
+         <>
+          <li className="hamLi">
+          <Link className="white-link" onClick={handleClick} to="/signin">
+          <span className="hamLink">
+            Log in
+          </span>
+          </Link>
+        </li>
+
+         <li className="hamLi">
+          <Link className="white-link" onClick={handleClick} to="/signup">
+          <span className="hamLink">
+            Sign up
+          </span>
+          </Link>
+        </li>
+         </>
+         }
+        <li className="hamLi">
+          <Link  className="white-link" onClick={handleClick} to="/profile">
+          <span className="hamLink">
+            Profile
+          </span>
+          </Link>
+        </li>
+        <li className="hamLi">
+          <Link  className="white-link" onClick={handleClick} to="/profile">
+          <span className="hamLink">
+            My Orders
+          </span>
+          </Link>
+        </li>
+        {userObject.userRole === 1?<>
+        <li className="hamLi">
+          <Link  className="white-link" onClick={handleClick} to="/profile">
+          <span className="hamLink">
+            Admin Panel
+          </span>
+          </Link>
+        </li></>:<></>}
+        
         <li>
-          <Link className="white-link" to="/cart">
-            <span>
+          <Link className="white-link" onClick={handleClick} to="/cart">
+            <span className="hamLink">
               <img id="cart-icon" src={cartIcon} alt="cart" />
-              <span>Cart</span>
+              <span  >Cart</span>
             </span>
           </Link>
         </li>
         {userObject.userRole === 1 || userObject.userRole === 2?<>
         
             <li>
-        <Link className="white-link" to="/create">
+        <Link onClick={handleClick} className="white-link" to="/create">
             <span>
-              <span>Create</span>
+              <span className="hamLink">Create</span>
             </span>
           </Link>
         </li>
         </>:<></>}
+       {userObject.loggedIn?<div className="hamLi"><LogOut/></div>:<></>}
       
       </ul>
     </nav>

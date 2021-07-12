@@ -12,7 +12,7 @@ export default function Products({products, loading}) {
   
 
   return (
-    <>
+    <> 
       {Array.isArray(products) ? (
         products.map((el) => {
           return (
